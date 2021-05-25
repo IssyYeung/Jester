@@ -2,13 +2,15 @@ import React from 'react';
 import {View, Text, StyleSheet} from 'react-native';
 import {useAppContext} from '../App.provider';
 
-const appContext = useAppContext();
-
 export const HistoryTab = () => {
+  const {savedJokes} = useAppContext();
+  console.log(savedJokes);
+
   return (
     <View style={styles.container}>
-      <Text>History Tab</Text>
-      <Text>{appContext.greeting}</Text>
+      {savedJokes.map(joke => (
+        <Text>{joke}</Text>
+      ))}
     </View>
   );
 };
