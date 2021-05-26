@@ -11,14 +11,19 @@ import React, {
 const URL = 'https://icanhazdadjoke.com/';
 
 type AppContextType = {
-  joke: string;
-  savedJokes: string[];
+  newJoke: '';
+  savedJokes: JokeWithTimestampType[];
   handleFetchJoke: () => void;
   handleSaveJoke: () => void;
 };
 
+type JokeWithTimestampType = {
+  joke: string;
+  timestamp: number;
+};
+
 const defaultValue = {
-  joke: '',
+  newJoke: {},
   savedJokes: [],
   handleFetchJoke: () => {},
   handleSaveJoke: () => {},
@@ -27,9 +32,8 @@ const defaultValue = {
 const AppContext = createContext<AppContextType>(defaultValue);
 
 export const AppProvider: React.FC = ({children}) => {
-  const [joke, setJoke] = useState<string>('');
-  //                         ^ should be string or object?
-  const [savedJokes, setSavedJokes] = useState<string[]>([]);
+  const [newJoke, setNewJoke] = useState<JokeWithTimestampType>();
+  const [savedJokes, setSavedJokes] = useState<JokeWithTimestampType[]>([]);
 
   const handleFetchJoke = useCallback(async () => {
     const response = await fetch(URL, {
@@ -38,13 +42,14 @@ export const AppProvider: React.FC = ({children}) => {
     });
     if (response.ok) {
       const j = await response.json();
-      setJoke(j.joke);
+      const jokeText = j.joke;
+      setNewJoke(jokeText);
       // ^ .joke in here?
     }
   }, []);
 
   const handleSaveJoke = () => {
-    setSavedJokes([joke, ...savedJokes]);
+    setSavedJokes([{joke: newJoke, timestamp: Date.now()}, ...savedJokes]);
     handleFetchJoke();
   };
 
@@ -55,7 +60,7 @@ export const AppProvider: React.FC = ({children}) => {
 
   return (
     <AppContext.Provider
-      value={{joke, savedJokes, handleFetchJoke, handleSaveJoke}}>
+      value={{newJoke, savedJokes, handleFetchJoke, handleSaveJoke}}>
       {children}
     </AppContext.Provider>
   );

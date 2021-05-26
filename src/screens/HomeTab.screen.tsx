@@ -4,13 +4,14 @@ import {useAppContext} from '../App.provider';
 import {SpeechBubble} from '../components/SpeechBubble.image';
 
 export const HomeTab = () => {
-  const {joke, handleFetchJoke, handleSaveJoke} = useAppContext();
+  const {newJoke, handleFetchJoke, handleSaveJoke} = useAppContext();
 
   return (
     <View style={styles.container}>
       <View style={styles.svgContainer}>
         <SpeechBubble />
-        <Text style={styles.joke}>{joke}</Text>
+        <Text style={styles.joke}>{newJoke}</Text>
+        {/* .joke ? */}
       </View>
       <TouchableOpacity>
         <Text onPress={handleSaveJoke}>Save</Text>
