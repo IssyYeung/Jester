@@ -1,5 +1,6 @@
 // what ??????
 
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import React, {
   createContext,
   useContext,
@@ -11,7 +12,7 @@ import React, {
 const URL = 'https://icanhazdadjoke.com/';
 
 type AppContextType = {
-  newJoke: '';
+  newJoke: string;
   savedJokes: JokeWithTimestampType[];
   handleFetchJoke: () => void;
   handleSaveJoke: () => void;
@@ -24,7 +25,7 @@ type JokeWithTimestampType = {
 };
 
 const defaultValue = {
-  newJoke: {},
+  newJoke: '',
   savedJokes: [],
   handleFetchJoke: () => {},
   handleSaveJoke: () => {},
@@ -34,7 +35,7 @@ const defaultValue = {
 const AppContext = createContext<AppContextType>(defaultValue);
 
 export const AppProvider: React.FC = ({children}) => {
-  const [newJoke, setNewJoke] = useState<JokeWithTimestampType>();
+  const [newJoke, setNewJoke] = useState<string>('');
   const [savedJokes, setSavedJokes] = useState<JokeWithTimestampType[]>([]);
 
   const handleFetchJoke = useCallback(async () => {
@@ -51,19 +52,37 @@ export const AppProvider: React.FC = ({children}) => {
   }, []);
 
   const handleSaveJoke = () => {
-    setSavedJokes([{joke: newJoke, timestamp: Date.now()}, ...savedJokes]);
+    let newState: JokeWithTimestampType[] = [
+      {joke: newJoke, timestamp: Date.now()},
+      ...savedJokes,
+    ];
+    setSavedJokes(newState);
+
+    setStorage(newState);
     handleFetchJoke();
   };
 
   const handleDeleteJoke = (selected: JokeWithTimestampType) => {
-    setSavedJokes(
-      savedJokes.filter(item => item.timestamp !== selected.timestamp),
+    let newState = savedJokes.filter(
+      item => item.timestamp !== selected.timestamp,
     );
+    setSavedJokes(newState);
+    setStorage(newState);
+  };
+
+  const setStorage = async (jokesToStore: JokeWithTimestampType[]) => {
+    await AsyncStorage.setItem('savedJokes', JSON.stringify(jokesToStore));
+  };
+  const getStorage = async () => {
+    let storedJokes = await AsyncStorage.getItem('savedJokes');
+    if (storedJokes != null) {
+      setSavedJokes(JSON.parse(storedJokes));
+    }
   };
 
   useEffect(() => {
     handleFetchJoke();
-    // handleSaveJoke(); ????
+    getStorage();
   }, [handleFetchJoke]);
 
   return (

@@ -13,7 +13,6 @@ export const HistoryTab = () => {
 
   const days = useMemo(() => {
     const ordered = orderBy(savedJokes, 'timestamp', 'desc');
-
     const grouped = groupBy(ordered, item =>
       format(new Date(item.timestamp), 'dd MMM yyyy'),
     );
@@ -25,29 +24,27 @@ export const HistoryTab = () => {
   }, [savedJokes]);
 
   return (
-    <SafeAreaView>
-      <FlatList
-        keyExtractor={item => item.day}
-        data={days}
-        renderItem={({item}) => (
-          <Drawer title={item.day}>
-            {item.jokesInDay.map((joke, index) => (
-              <View key={index} style={styles.jokeContainer}>
-                <Text style={styles.text}>{joke.joke}</Text>
-                <View style={styles.dateAndBtn}>
-                  <Text style={[styles.text, styles.date]}>
-                    {format(new Date(joke.timestamp), 'h:mmaaa')}
-                  </Text>
-                  <TouchableOpacity onPress={() => handleDeleteJoke(joke)}>
-                    <Text style={[styles.text, styles.btnText]}>Delete</Text>
-                  </TouchableOpacity>
-                </View>
+    <FlatList
+      keyExtractor={item => item.day}
+      data={days}
+      renderItem={({item}) => (
+        <Drawer title={item.day}>
+          {item.jokesInDay.map((joke, index) => (
+            <View key={index} style={styles.jokeContainer}>
+              <Text style={styles.text}>{joke.joke}</Text>
+              <View style={styles.dateAndBtn}>
+                <Text style={[styles.text, styles.date]}>
+                  {format(new Date(joke.timestamp), 'h:mmaaa')}
+                </Text>
+                <TouchableOpacity onPress={() => handleDeleteJoke(joke)}>
+                  <Text style={[styles.text, styles.btnText]}>Delete</Text>
+                </TouchableOpacity>
               </View>
-            ))}
-          </Drawer>
-        )}
-      />
-    </SafeAreaView>
+            </View>
+          ))}
+        </Drawer>
+      )}
+    />
   );
 };
 
