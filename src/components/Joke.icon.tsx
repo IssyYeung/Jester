@@ -3,10 +3,10 @@ import {Svg, Path, Circle, G} from 'react-native-svg';
 
 // what?
 type JokeIconProps = {
-  size?: number;
+  size?: string;
 };
 
-export const JokeIcon: React.FC<JokeIconProps> = ({size = 40})  => {
+export const JokeIcon: React.FC<JokeIconProps> = ({size = 40}) => {
   return (
     <Svg height={size} width={size} viewBox="0 0 24 24">
       <Circle cx="12" cy="12" fill="#ffd54f" r="12" />
@@ -28,4 +28,4 @@ export const JokeIcon: React.FC<JokeIconProps> = ({size = 40})  => {
       </G>
     </Svg>
   );
-}
+};

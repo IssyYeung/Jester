@@ -11,7 +11,7 @@ export const RootNavigator: React.FC = () => {
       <RootStack.Screen
         name="BottomTabs"
         component={BottomTabsNavigator}
-        options={{headerShown: false }} // or true?? Heading bars?
+        options={{headerShown: false}} // or true?? Heading bars?
       />
     </RootStack.Navigator>
   );

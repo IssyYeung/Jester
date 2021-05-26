@@ -1,5 +1,6 @@
 import React from 'react';
-import {View, Text, StyleSheet} from 'react-native';
+import {View, Text, FlatList} from 'react-native';
+import {SafeAreaView} from 'react-native-safe-area-context';
 import {useAppContext} from '../App.provider';
 
 export const HistoryTab = () => {
@@ -7,18 +8,17 @@ export const HistoryTab = () => {
   console.log(savedJokes);
 
   return (
-    <View style={styles.container}>
-      {savedJokes.map(joke => (
-        <Text>{joke}</Text>
-      ))}
-    </View>
+    <SafeAreaView>
+      <FlatList
+        keyExtractor={item => item}
+        // keyExtractor={(item, index) => index.toString()}
+        data={savedJokes}
+        renderItem={({item}) => (
+          <View>
+            <Text>{item}</Text>
+          </View>
+        )}
+      />
+    </SafeAreaView>
   );
 };
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-});
