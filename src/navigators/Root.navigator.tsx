@@ -1,11 +1,11 @@
-import React from 'react';
+import React, {FC} from 'react';
 import {createStackNavigator} from '@react-navigation/stack';
 
 import {BottomTabsNavigator} from './BottomTabs.navigator';
 
 const RootStack = createStackNavigator();
 
-export const RootNavigator: React.FC = () => {
+export const RootNavigator: FC = () => {
   return (
     <RootStack.Navigator initialRouteName="BottomTabs">
       <RootStack.Screen

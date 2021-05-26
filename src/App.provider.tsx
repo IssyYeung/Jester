@@ -15,6 +15,7 @@ type AppContextType = {
   savedJokes: JokeWithTimestampType[];
   handleFetchJoke: () => void;
   handleSaveJoke: () => void;
+  handleDeleteJoke: (selected: JokeWithTimestampType) => void;
 };
 
 type JokeWithTimestampType = {
@@ -27,6 +28,7 @@ const defaultValue = {
   savedJokes: [],
   handleFetchJoke: () => {},
   handleSaveJoke: () => {},
+  handleDeleteJoke: () => {},
 };
 
 const AppContext = createContext<AppContextType>(defaultValue);
@@ -53,6 +55,12 @@ export const AppProvider: React.FC = ({children}) => {
     handleFetchJoke();
   };
 
+  const handleDeleteJoke = (selected: JokeWithTimestampType) => {
+    setSavedJokes(
+      savedJokes.filter(item => item.timestamp !== selected.timestamp),
+    );
+  };
+
   useEffect(() => {
     handleFetchJoke();
     // handleSaveJoke(); ????
@@ -60,7 +68,13 @@ export const AppProvider: React.FC = ({children}) => {
 
   return (
     <AppContext.Provider
-      value={{newJoke, savedJokes, handleFetchJoke, handleSaveJoke}}>
+      value={{
+        newJoke,
+        savedJokes,
+        handleFetchJoke,
+        handleSaveJoke,
+        handleDeleteJoke,
+      }}>
       {children}
     </AppContext.Provider>
   );

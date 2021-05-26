@@ -13,12 +13,18 @@ export const HomeTab = () => {
         <Text style={styles.joke}>{newJoke}</Text>
         {/* .joke ? */}
       </View>
-      <TouchableOpacity>
-        <Text onPress={handleSaveJoke}>Save</Text>
-      </TouchableOpacity>
-      <TouchableOpacity>
-        <Text onPress={handleFetchJoke}>Discard</Text>
-      </TouchableOpacity>
+      <View style={styles.btns}>
+        <TouchableOpacity style={[styles.btn, styles.save]}>
+          <Text style={styles.btnText} onPress={handleSaveJoke}>
+            Save
+          </Text>
+        </TouchableOpacity>
+        <TouchableOpacity style={[styles.btn, styles.discard]}>
+          <Text style={styles.btnText} onPress={handleFetchJoke}>
+            Discard
+          </Text>
+        </TouchableOpacity>
+      </View>
     </View>
   );
 };
@@ -36,8 +42,29 @@ const styles = StyleSheet.create({
   },
   joke: {
     position: 'absolute',
-    width: '80%',
+    width: '70%',
     textAlign: 'center',
     transform: [{translateY: -20}],
+    fontSize: 18,
+  },
+  btns: {
+    flexDirection: 'row',
+  },
+  btn: {
+    width: 100,
+    padding: 10,
+    borderRadius: 10,
+  },
+  btnText: {
+    fontSize: 18,
+    color: 'white',
+    textAlign: 'center',
+  },
+  save: {
+    backgroundColor: '#419d78',
+    marginRight: 40,
+  },
+  discard: {
+    backgroundColor: '#a3320b',
   },
 });
