@@ -1,11 +1,14 @@
 import React from 'react';
-import {View, Text, StyleSheet} from 'react-native';
+import {View, Text, StyleSheet, ImageBackground} from 'react-native';
+import BackgroundImg from '../assets/images/background-building.jpg';
 
 export const AnalyticsTab = () => {
   return (
-    <View style={styles.container}>
-      <Text>Stats Tab</Text>
-    </View>
+    <ImageBackground style={styles.container} source={BackgroundImg}>
+      <View style={styles.textContainer}>
+        <Text style={styles.heading}>Stats tab under construction</Text>
+      </View>
+    </ImageBackground>
   );
 };
 
@@ -14,5 +17,14 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
+  },
+  textContainer: {
+    backgroundColor: 'white',
+    borderRadius: 30,
+  },
+  heading: {
+    padding: 20,
+    fontSize: 18,
+    fontWeight: '700',
   },
 });

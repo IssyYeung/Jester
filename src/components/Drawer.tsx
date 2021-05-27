@@ -35,7 +35,7 @@ export const Drawer = ({title, children}) => {
 
 const styles = StyleSheet.create({
   container: {
-    marginBottom: 10,
+    marginVertical: 10,
   },
   item: {
     flexDirection: 'row',
@@ -45,7 +45,7 @@ const styles = StyleSheet.create({
   },
   text: {
     fontSize: 20,
-    color: '#FFC72A',
+    color: 'white',
     fontWeight: '700',
   },
 });

@@ -1,14 +1,15 @@
 import React, {useMemo} from 'react';
-import {View, Text, FlatList, StyleSheet} from 'react-native';
+import {FlatList, ImageBackground, StyleSheet} from 'react-native';
 import {useAppContext} from '../App.provider';
 import format from 'date-fns/format';
 import orderBy from 'lodash/orderBy';
 import groupBy from 'lodash/groupBy';
 import {Drawer} from '../components/Drawer';
-import {TouchableOpacity} from 'react-native-gesture-handler';
+import {JokeItem} from '../components/JokeItem';
+import BackgroundImg from '../assets/images/background-saved.jpg';
 
 export const HistoryTab = () => {
-  const {savedJokes, handleDeleteJoke} = useAppContext();
+  const {savedJokes} = useAppContext();
 
   const days = useMemo(() => {
     const ordered = orderBy(savedJokes, 'timestamp', 'desc');
@@ -23,51 +24,47 @@ export const HistoryTab = () => {
   }, [savedJokes]);
 
   return (
-    <FlatList
-      keyExtractor={item => item.day}
-      data={days}
-      renderItem={({item}) => (
-        <Drawer title={item.day}>
-          {item.jokesInDay.map((joke, index) => (
-            <View key={index} style={styles.jokeContainer}>
-              <Text style={styles.text}>{joke.joke}</Text>
-              <View style={styles.dateAndBtn}>
-                <Text style={[styles.text, styles.date]}>
-                  {format(new Date(joke.timestamp), 'h:mmaaa')}
-                </Text>
-                <TouchableOpacity onPress={() => handleDeleteJoke(joke)}>
-                  <Text style={[styles.text, styles.btnText]}>Delete</Text>
-                </TouchableOpacity>
-              </View>
-            </View>
-          ))}
-        </Drawer>
-      )}
-    />
+    <ImageBackground style={styles.container} source={BackgroundImg}>
+      <FlatList
+        keyExtractor={item => item.day}
+        data={days}
+        renderItem={({item}) => (
+          <Drawer title={item.day}>
+            {item.jokesInDay.map((joke, index) => (
+              <JokeItem joke={joke} key={index} />
+            ))}
+          </Drawer>
+        )}
+      />
+    </ImageBackground>
   );
 };
 
 const styles = StyleSheet.create({
-  jokeContainer: {
-    padding: 10,
-    backgroundColor: 'white',
-    marginVertical: 5,
-  },
-  dateAndBtn: {
-    flexDirection: 'row',
-    justifyContent: 'space-around',
-    marginTop: 10,
-  },
-  text: {
-    fontSize: 16,
-    textAlign: 'center',
-  },
-  date: {
-    fontWeight: '700',
-    color: '#1789FC',
-  },
-  btnText: {
-    fontWeight: '700',
-    color: '#D81159',
+  container: {
+    flex: 1,
   },
 });
+//   jokeContainer: {
+//     padding: 10,
+//     backgroundColor: 'white',
+//     marginVertical: 5,
+//   },
+//   dateAndBtn: {
+//     flexDirection: 'row',
+//     justifyContent: 'space-around',
+//     marginTop: 10,
+//   },
+//   text: {
+//     fontSize: 16,
+//     textAlign: 'center',
+//   },
+//   date: {
+//     fontWeight: '700',
+//     color: '#1789FC',
+//   },
+//   btnText: {
+//     fontWeight: '700',
+//     color: '#D81159',
+//   },
+// });
