@@ -9,7 +9,7 @@ export const RootNavigator: FC = () => {
   return (
     <RootStack.Navigator initialRouteName="BottomTabs">
       <RootStack.Screen
-        name="Joke Jenerator"
+        name="Jester"
         component={BottomTabsNavigator}
         options={{headerShown: true}} // or true?? Heading bars?
       />

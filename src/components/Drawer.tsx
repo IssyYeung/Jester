@@ -35,17 +35,17 @@ export const Drawer = ({title, children}) => {
 
 const styles = StyleSheet.create({
   container: {
-    // marginBottom: 10,
+    marginBottom: 10,
   },
   item: {
     flexDirection: 'row',
     justifyContent: 'space-between',
-    backgroundColor: '#495057',
-    padding: 15,
+    backgroundColor: '#393E41',
+    padding: 20,
   },
   text: {
-    fontSize: 18,
-    color: 'white',
+    fontSize: 20,
+    color: '#FFC72A',
     fontWeight: '700',
   },
 });

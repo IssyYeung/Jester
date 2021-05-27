@@ -1,6 +1,5 @@
 import React, {useMemo} from 'react';
 import {View, Text, FlatList, StyleSheet} from 'react-native';
-import {SafeAreaView} from 'react-native-safe-area-context';
 import {useAppContext} from '../App.provider';
 import format from 'date-fns/format';
 import orderBy from 'lodash/orderBy';
@@ -65,9 +64,10 @@ const styles = StyleSheet.create({
   },
   date: {
     fontWeight: '700',
+    color: '#1789FC',
   },
   btnText: {
     fontWeight: '700',
-    color: 'red',
+    color: '#D81159',
   },
 });
