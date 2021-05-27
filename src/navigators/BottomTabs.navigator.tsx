@@ -44,7 +44,7 @@ export const BottomTabsNavigator: FC = () => {
         },
 
         headerTitleStyle: {fontFamily: 'Kalam-Bold'},
-        tabBarShowLabel: false,
+        tabBarShowLabel: true, // this was false???
         tabBarActiveTintColor: '#1D84B5',
         tabBarInactiveTintColor: '#8E9AAF',
       })}>
