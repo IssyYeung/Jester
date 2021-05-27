@@ -30,8 +30,8 @@ export const HistoryTab = () => {
         data={days}
         renderItem={({item}) => (
           <Drawer title={item.day}>
-            {item.jokesInDay.map((joke, index) => (
-              <JokeItem joke={joke} key={index} />
+            {item.jokesInDay.map(joke => (
+              <JokeItem joke={joke} key={joke.timestamp} />
             ))}
           </Drawer>
         )}
@@ -45,26 +45,3 @@ const styles = StyleSheet.create({
     flex: 1,
   },
 });
-//   jokeContainer: {
-//     padding: 10,
-//     backgroundColor: 'white',
-//     marginVertical: 5,
-//   },
-//   dateAndBtn: {
-//     flexDirection: 'row',
-//     justifyContent: 'space-around',
-//     marginTop: 10,
-//   },
-//   text: {
-//     fontSize: 16,
-//     textAlign: 'center',
-//   },
-//   date: {
-//     fontWeight: '700',
-//     color: '#1789FC',
-//   },
-//   btnText: {
-//     fontWeight: '700',
-//     color: '#D81159',
-//   },
-// });

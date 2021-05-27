@@ -52,8 +52,9 @@ const styles = StyleSheet.create({
     position: 'absolute',
     width: '60%',
     textAlign: 'center',
-    transform: [{translateY: -25}],
+    transform: [{translateY: -30}],
     fontSize: 18,
+    fontFamily: 'Kalam-Regular',
   },
   btnsContainer: {
     flexDirection: 'row',
@@ -69,11 +70,6 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.1,
     justifyContent: 'center',
     alignItems: 'center',
-  },
-  btnText: {
-    fontSize: 18,
-    color: 'black',
-    textAlign: 'center',
   },
   save: {
     marginRight: 15,

@@ -44,8 +44,9 @@ const styles = StyleSheet.create({
     padding: 20,
   },
   text: {
-    fontSize: 20,
+    fontSize: 22,
     color: 'white',
-    fontWeight: '700',
+
+    fontFamily: 'Kalam-Bold',
   },
 });

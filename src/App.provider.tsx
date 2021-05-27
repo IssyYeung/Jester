@@ -56,18 +56,19 @@ export const AppProvider: React.FC = ({children}) => {
       {joke: newJoke, timestamp: Date.now()},
       ...savedJokes,
     ];
+    setStorage(newState);
     setSavedJokes(newState);
 
-    setStorage(newState);
     handleFetchJoke();
   };
 
   const handleDeleteJoke = (selected: JokeWithTimestampType) => {
+    // make useCallback?
     let newState = savedJokes.filter(
       item => item.timestamp !== selected.timestamp,
     );
-    setSavedJokes(newState);
     setStorage(newState);
+    setSavedJokes(newState);
   };
 
   const setStorage = async (jokesToStore: JokeWithTimestampType[]) => {
