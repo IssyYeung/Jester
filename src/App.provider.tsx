@@ -8,6 +8,7 @@ import React, {
   useEffect,
   useCallback,
 } from 'react';
+import {LayoutAnimation} from 'react-native';
 
 const URL = 'https://icanhazdadjoke.com/';
 
@@ -69,6 +70,7 @@ export const AppProvider: React.FC = ({children}) => {
     );
     setStorage(newState);
     setSavedJokes(newState);
+    LayoutAnimation.configureNext(LayoutAnimation.Presets.easeInEaseOut);
   };
 
   const setStorage = async (jokesToStore: JokeWithTimestampType[]) => {
