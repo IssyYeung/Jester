@@ -2,7 +2,12 @@ import React, {useMemo} from 'react';
 import {View, Text, StyleSheet, ImageBackground} from 'react-native';
 import {JokeWithTimestampType} from '../App.provider';
 import BackgroundImg from '../assets/images/background-heart.jpeg';
-import {VictoryLine, VictoryChart, VictoryTheme} from 'victory-native';
+import {
+  VictoryLine,
+  VictoryChart,
+  VictoryTheme,
+  VictoryAxis,
+} from 'victory-native';
 import {useAppContext} from '../App.provider';
 import orderBy from 'lodash/orderBy';
 import groupBy from 'lodash/groupBy';
@@ -15,7 +20,7 @@ type GroupedType = {
 export const AnalyticsTab = () => {
   const {savedJokes} = useAppContext();
 
-  const days = useMemo(() => {
+  const data = useMemo(() => {
     const ordered = orderBy(savedJokes, 'timestamp', 'asc');
     const grouped: GroupedType = groupBy(ordered, item =>
       format(new Date(item.timestamp), 'dd MMM'),
@@ -31,8 +36,39 @@ export const AnalyticsTab = () => {
     <ImageBackground style={styles.container} source={BackgroundImg}>
       <View style={styles.textContainer}>
         <Text style={styles.heading}>Jokes Saved Each Day</Text>
-        <VictoryChart width={350} theme={VictoryTheme.material}>
-          <VictoryLine data={days} x="day" y="jokesSaved" />
+        <VictoryChart
+          width={320}
+          theme={VictoryTheme.material}
+          animate={{duration: 2000, easing: 'cubicInOut'}}>
+          <VictoryAxis
+            dependentAxis
+            domain={[0]}
+            style={{
+              axis: {stroke: '#555E62'},
+              // grid: {stroke: ({tick}) => (tick = 0 ? 'none' : '#E9EBEC')},
+              axisLabel: {padding: 30, fontWeight: '700', fontSize: 14},
+            }}
+            label="Number of Jokes Saved"
+            tickFormat={t => Math.round(t)}
+          />
+          <VictoryAxis
+            style={{
+              axis: {stroke: '#555E62'},
+              grid: {
+                stroke: ({tick}) => (tick = 0 ? 'none' : '#E9EBEC'),
+              },
+              axisLabel: {padding: 30, fontWeight: '700', fontSize: 14},
+            }}
+            label="Date"
+          />
+          <VictoryLine
+            data={data}
+            x="day"
+            y="jokesSaved"
+            style={{
+              data: {stroke: '#D81159'},
+            }}
+          />
         </VictoryChart>
       </View>
     </ImageBackground>
@@ -48,10 +84,11 @@ const styles = StyleSheet.create({
   textContainer: {
     backgroundColor: 'white',
     borderRadius: 30,
+    padding: 15,
   },
   heading: {
-    paddingTop: 20,
-    marginBottom: -20,
+    paddingTop: 10,
+    marginBottom: -30,
     fontSize: 20,
     fontFamily: 'Kalam-Bold',
     textAlign: 'center',
