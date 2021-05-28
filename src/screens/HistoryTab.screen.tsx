@@ -6,7 +6,7 @@ import orderBy from 'lodash/orderBy';
 import groupBy from 'lodash/groupBy';
 import {Drawer} from '../components/Drawer';
 import {JokeItem} from '../components/JokeItem';
-import BackgroundImg from '../assets/images/background-heart.jpeg';
+import BackgroundImg from '../assets/images/background-emoji.jpg';
 
 export const HistoryTab = () => {
   const {savedJokes} = useAppContext();

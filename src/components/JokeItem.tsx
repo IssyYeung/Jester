@@ -90,7 +90,9 @@ const styles = StyleSheet.create({
     paddingHorizontal: 20,
     paddingVertical: 10,
     backgroundColor: 'white',
-    marginVertical: 5,
+    marginTop: 10,
+    marginHorizontal: 15,
+    borderRadius: 15,
   },
   dateAndBtn: {
     flexDirection: 'row',

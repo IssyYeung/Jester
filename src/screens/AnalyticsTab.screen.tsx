@@ -1,7 +1,7 @@
 import React, {useMemo} from 'react';
 import {View, Text, StyleSheet, ImageBackground} from 'react-native';
 import {JokeWithTimestampType} from '../App.provider';
-import BackgroundImg from '../assets/images/background-emoji.jpg';
+import BackgroundImg from '../assets/images/background-heart.jpeg';
 import {VictoryLine, VictoryChart, VictoryTheme} from 'victory-native';
 import {useAppContext} from '../App.provider';
 import orderBy from 'lodash/orderBy';
@@ -16,7 +16,7 @@ export const AnalyticsTab = () => {
   const {savedJokes} = useAppContext();
 
   const days = useMemo(() => {
-    const ordered = orderBy(savedJokes, 'timestamp', 'desc');
+    const ordered = orderBy(savedJokes, 'timestamp', 'asc');
     const grouped: GroupedType = groupBy(ordered, item =>
       format(new Date(item.timestamp), 'dd MMM'),
     );
