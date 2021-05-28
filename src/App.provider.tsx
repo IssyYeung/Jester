@@ -19,7 +19,7 @@ type AppContextType = {
   handleDeleteJoke: (selected: JokeWithTimestampType) => void;
 };
 
-type JokeWithTimestampType = {
+export type JokeWithTimestampType = {
   joke: string;
   timestamp: number;
 };

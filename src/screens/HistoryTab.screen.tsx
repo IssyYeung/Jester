@@ -6,7 +6,7 @@ import orderBy from 'lodash/orderBy';
 import groupBy from 'lodash/groupBy';
 import {Drawer} from '../components/Drawer';
 import {JokeItem} from '../components/JokeItem';
-import BackgroundImg from '../assets/images/background-saved.jpg';
+import BackgroundImg from '../assets/images/background-heart.jpeg';
 
 export const HistoryTab = () => {
   const {savedJokes} = useAppContext();
@@ -16,6 +16,9 @@ export const HistoryTab = () => {
     const grouped = groupBy(ordered, item =>
       format(new Date(item.timestamp), 'dd MMM yyyy'),
     );
+
+    console.log(ordered);
+    console.log(grouped);
 
     return Object.entries(grouped).map(([day, jokesInDay]) => ({
       day,

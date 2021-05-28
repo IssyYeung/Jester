@@ -1,22 +1,38 @@
-import React from 'react';
+import React, {useMemo} from 'react';
 import {View, Text, StyleSheet, ImageBackground} from 'react-native';
-import BackgroundImg from '../assets/images/background-building.jpg';
+import {JokeWithTimestampType} from '../App.provider';
+import BackgroundImg from '../assets/images/background-emoji.jpg';
 import {VictoryLine, VictoryChart, VictoryTheme} from 'victory-native';
+import {useAppContext} from '../App.provider';
+import orderBy from 'lodash/orderBy';
+import groupBy from 'lodash/groupBy';
+import format from 'date-fns/format';
 
-let data = [
-  {day: '25 May', jokesSaved: 0},
-  {day: '26 May', jokesSaved: 5},
-  {day: '27 May', jokesSaved: 6},
-  {day: '28 May', jokesSaved: 4},
-];
+type GroupedType = {
+  day: JokeWithTimestampType[];
+};
 
 export const AnalyticsTab = () => {
+  const {savedJokes} = useAppContext();
+
+  const days = useMemo(() => {
+    const ordered = orderBy(savedJokes, 'timestamp', 'desc');
+    const grouped: GroupedType = groupBy(ordered, item =>
+      format(new Date(item.timestamp), 'dd MMM yyyy'),
+    );
+
+    return Object.entries(grouped).map(([day, jokesInDay]) => ({
+      day,
+      jokesSaved: jokesInDay.length,
+    }));
+  }, [savedJokes]);
+
   return (
     <ImageBackground style={styles.container} source={BackgroundImg}>
       <View style={styles.textContainer}>
         <Text style={styles.heading}>Jokes Saved on Each Day</Text>
         <VictoryChart width={350} theme={VictoryTheme.material}>
-          <VictoryLine data={data} x="day" y="jokesSaved" />
+          <VictoryLine data={days} x="day" y="jokesSaved" />
         </VictoryChart>
       </View>
     </ImageBackground>
