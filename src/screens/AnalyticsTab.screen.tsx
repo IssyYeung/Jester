@@ -18,7 +18,7 @@ export const AnalyticsTab = () => {
   const days = useMemo(() => {
     const ordered = orderBy(savedJokes, 'timestamp', 'desc');
     const grouped: GroupedType = groupBy(ordered, item =>
-      format(new Date(item.timestamp), 'dd MMM yyyy'),
+      format(new Date(item.timestamp), 'dd MMM'),
     );
 
     return Object.entries(grouped).map(([day, jokesInDay]) => ({
