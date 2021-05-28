@@ -7,7 +7,6 @@ import {JokeIcon} from '../components/Joke.icon';
 import {SaveIcon} from '../components/Save.icon';
 import {StatsIcon} from '../components/Stats.icon';
 import {NavigatorScreenParams} from '@react-navigation/native';
-import {createStackNavigator} from '@react-navigation/stack';
 
 export type RootStackParamList = {
   BottomTabs: NavigatorScreenParams<BottomTabsParamList>;
@@ -21,14 +20,10 @@ export type BottomTabsParamList = {
 };
 
 const BottomTabs = createBottomTabNavigator<BottomTabsParamList>();
-const ScreenStack = createStackNavigator();
 
 export const BottomTabsNavigator: FC = () => {
   return (
     <BottomTabs.Navigator
-      tabBarOptions={
-        {showLabel: false} // this should turn off nav text??
-      }
       screenOptions={({route}) => ({
         tabBarIcon: () => {
           if (route.name === 'HomeTab') {
@@ -43,8 +38,9 @@ export const BottomTabsNavigator: FC = () => {
           return null;
         },
 
-        headerTitleStyle: {fontFamily: 'Kalam-Bold'},
-        tabBarShowLabel: true, // this was false???
+        showLabel: false, // this should turn off nav text??
+
+        tabBarShowLabel: false, // this was false???
         tabBarActiveTintColor: '#1D84B5',
         tabBarInactiveTintColor: '#8E9AAF',
       })}>

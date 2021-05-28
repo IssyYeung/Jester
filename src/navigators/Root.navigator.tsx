@@ -11,7 +11,7 @@ export const RootNavigator: FC = () => {
       <RootStack.Screen
         name="Jester"
         component={BottomTabsNavigator}
-        options={{headerShown: true}} // or true?? Heading bars?
+        options={{headerShown: false}} // or true?? Heading bars?
       />
     </RootStack.Navigator>
   );

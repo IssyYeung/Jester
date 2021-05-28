@@ -14,6 +14,7 @@ import Animated, {
   useSharedValue,
   withTiming,
 } from 'react-native-reanimated';
+import {Cross} from '../components/CrossMini.icon';
 
 const maxPan = 100;
 
@@ -70,15 +71,15 @@ export function JokeItem({joke}) {
       onGestureEvent={onGestureEvent}
       onHandlerStateChange={onHandlerStateChange}>
       <Animated.View style={[styles.jokeContainer, animatedStyles]}>
-        <Text style={styles.text}>{joke.joke}</Text>
         <View style={styles.dateAndBtn}>
           <Text style={[styles.text, styles.date]}>
             {format(new Date(joke.timestamp), 'h:mmaaa')}
           </Text>
           <TouchableOpacity onPress={() => handleDeleteJoke(joke)}>
-            <Text style={[styles.text, styles.btnText]}>Delete</Text>
+            <Cross />
           </TouchableOpacity>
         </View>
+        <Text style={styles.text}>{joke.joke}</Text>
       </Animated.View>
     </PanGestureHandler>
   );
@@ -86,14 +87,16 @@ export function JokeItem({joke}) {
 
 const styles = StyleSheet.create({
   jokeContainer: {
-    padding: 10,
+    paddingHorizontal: 20,
+    paddingVertical: 10,
     backgroundColor: 'white',
     marginVertical: 5,
   },
   dateAndBtn: {
     flexDirection: 'row',
-    justifyContent: 'space-around',
-    marginTop: 10,
+    justifyContent: 'space-between',
+    marginBottom: 5,
+    alignItems: 'center',
   },
   text: {
     fontSize: 18,
@@ -102,9 +105,5 @@ const styles = StyleSheet.create({
   },
   date: {
     fontFamily: 'Kalam-Regular',
-  },
-  btnText: {
-    fontFamily: 'Kalam-Regular',
-    color: '#D81159',
   },
 });
