@@ -39,7 +39,7 @@ export const BottomTabsNavigator: FC = () => {
         },
 
         showLabel: false, // this should turn off nav text??
-
+        headerTitleStyle: {fontFamily: 'Kalam-Bold', fontSize: 24},
         tabBarShowLabel: false, // this was false???
         tabBarActiveTintColor: '#1D84B5',
         tabBarInactiveTintColor: '#8E9AAF',
@@ -47,7 +47,7 @@ export const BottomTabsNavigator: FC = () => {
       <BottomTabs.Screen
         name="HomeTab"
         component={HomeTab}
-        options={{title: 'Joke Jenerator'}}
+        options={{title: 'New Jokes'}}
       />
 
       <BottomTabs.Screen
@@ -58,7 +58,7 @@ export const BottomTabsNavigator: FC = () => {
       <BottomTabs.Screen
         name="AnalyticsTab"
         component={AnalyticsTab}
-        options={{title: 'My Stats'}}
+        options={{title: 'Stats'}}
       />
     </BottomTabs.Navigator>
   );

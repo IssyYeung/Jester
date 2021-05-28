@@ -30,7 +30,7 @@ export const AnalyticsTab = () => {
   return (
     <ImageBackground style={styles.container} source={BackgroundImg}>
       <View style={styles.textContainer}>
-        <Text style={styles.heading}>Jokes Saved on Each Day</Text>
+        <Text style={styles.heading}>Jokes Saved Each Day</Text>
         <VictoryChart width={350} theme={VictoryTheme.material}>
           <VictoryLine data={days} x="day" y="jokesSaved" />
         </VictoryChart>
@@ -51,8 +51,9 @@ const styles = StyleSheet.create({
   },
   heading: {
     paddingTop: 20,
-    fontSize: 18,
-    fontWeight: '700',
+    marginBottom: -20,
+    fontSize: 20,
+    fontFamily: 'Kalam-Bold',
     textAlign: 'center',
   },
 });
