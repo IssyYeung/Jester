@@ -45,7 +45,9 @@ export const AnalyticsTab = () => {
             domain={[0]}
             style={{
               axis: {stroke: '#555E62'},
-              // grid: {stroke: ({tick}) => (tick = 0 ? 'none' : '#E9EBEC')},
+              grid: {
+                // stroke: ({tick}) => (tick = '26 May' ? 'none' : '#E9EBEC'),
+              },
               axisLabel: {padding: 30, fontWeight: '700', fontSize: 14},
             }}
             label="Number of Jokes Saved"

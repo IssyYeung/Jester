@@ -17,9 +17,6 @@ export const HistoryTab = () => {
       format(new Date(item.timestamp), 'dd MMM yyyy'),
     );
 
-    console.log(ordered);
-    console.log(grouped);
-
     return Object.entries(grouped).map(([day, jokesInDay]) => ({
       day,
       jokesInDay,

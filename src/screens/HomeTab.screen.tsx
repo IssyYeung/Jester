@@ -19,9 +19,7 @@ export const HomeTab = () => {
     <ImageBackground style={styles.container} source={BackgroundImg}>
       <View style={styles.svgContainer}>
         <SpeechBubble />
-
         <Text style={styles.joke}>{newJoke}</Text>
-        {/* .joke ? */}
       </View>
       <View style={styles.btnsContainer}>
         <TouchableOpacity
